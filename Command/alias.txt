@@ -1,0 +1,56 @@
+[[Linuxのシェルまとめ]]
+
+#setlinebreak(on)
+
+
+* alias [#o47a75d0]
+
+
+''構文''
+
+[1]csh・tcsh の場合
+　　→　イコールが付かない。
+% alias ls "ls -lFA"
+% alias du "du -k"
+% alias memo "mule ~/lib/memo"
+% alias f "find / -name '\!*' -print"
+
+#br
+
+[2]sh・bash の場合
+　　→　イコールが付く。
+$ alias ls="ls -lFA"
+$ alias du="du -k"
+$ alias memo="mule ~/lib/memo"
+$ alias f="find / -name '\!*' -print"
+
+
+**使い方 [#eb06da51]
+#br
+
+''①.bashrcや.profileに記載する''
+ alias f='find / -name '\''\!*'\'' -print'
+ alias h='history'
+ alias l.='ls -d .* --color=tty'
+ alias ll='ls -l --color=tty'
+ alias ls='ls -lrt'
+ alias vi='vim'
+ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+
+#br
+''②aliasを一時的に解除する方法''
+　　フルパスで実行する。
+　　$ /bin/cp -f cc.txt dd.txt
+
+　　COLOR(blue):\を付けて実行する。
+　　$ \cp -f cc.txt dd.txt
+
+
+#br
+''③alias一覧を表示''
+　　$ alias
+
+
+#br
+''④aliasを解除する''
+　　$ unalias f
