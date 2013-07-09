@@ -1,0 +1,100 @@
+
+insert into emp values ( '1' , to_date('2013-01-01 00:00:01' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name1'   );
+insert into emp values ( '2' , to_date('2013-01-01 00:00:01' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name1'   );
+insert into emp values ( '3' , to_date('2013-01-01 00:00:01' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name1'   );
+insert into emp values ( '4' , to_date('2013-01-01 00:00:01' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name1'   );
+insert into emp values ( '5' , to_date('2013-01-01 00:00:01' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name1'   );
+insert into emp values ( '5' , to_date('2013-01-01 00:00:11' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name5'   );
+insert into emp values ( '5' , to_date('2013-01-01 00:00:12' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name5'   );
+insert into emp values ( '5' , to_date('2013-01-01 00:00:13' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name5'   );
+insert into emp values ( '5' , to_date('2013-01-01 00:00:14' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name5'   );
+insert into emp values ( '5' , to_date('2013-01-01 00:00:15' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name5'   );
+insert into emp values ( '10' , to_date('2013-01-01 00:00:02' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name11'   );
+insert into emp values ( '10' , to_date('2013-01-01 00:00:02' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name12'   );
+insert into emp values ( '10' , to_date('2013-01-01 00:00:02' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name13'   );
+insert into emp values ( '10' , to_date('2013-01-01 00:00:02' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name14'   );
+insert into emp values ( '10' , to_date('2013-01-01 00:00:02' , 'YYYY-MM-DD HH24:MI:SS' ) ,  'Name15'   );
+
+
+
+TIME                      ID         NAME
+------------------------- ---------- --------------------
+2013-01-01 00:00:01       1          Name1
+2013-01-01 00:00:01       2          Name1
+2013-01-01 00:00:01       3          Name1
+2013-01-01 00:00:01       4          Name1
+2013-01-01 00:00:01       5          Name1
+2013-01-01 00:00:02       10         Name11
+2013-01-01 00:00:02       10         Name12
+2013-01-01 00:00:02       10         Name13
+2013-01-01 00:00:02       10         Name14
+2013-01-01 00:00:02       10         Name15
+2013-01-01 00:00:11       5          Name5
+2013-01-01 00:00:12       5          Name5
+2013-01-01 00:00:13       5          Name5
+2013-01-01 00:00:14       5          Name5
+2013-01-01 00:00:15       5          Name5
+
+15s‚ª‘I‘ð‚³‚ê‚Ü‚µ‚½B
+
+2013-01-01 00:00:01       1          Name1
+2013-01-01 00:00:01       2          Name1
+2013-01-01 00:00:01       3          Name1
+2013-01-01 00:00:01       4          Name1
+2013-01-01 00:00:01       5          Name1
+2013-01-01 00:00:02       10         Name11
+2013-01-01 00:00:02       10         Name12
+2013-01-01 00:00:02       10         Name13
+2013-01-01 00:00:02       10         Name14
+2013-01-01 00:00:02       10         Name15
+2013-01-01 00:00:11       5          Name5
+2013-01-01 00:00:12       5          Name5
+2013-01-01 00:00:13       5          Name5
+2013-01-01 00:00:14       5          Name5
+2013-01-01 00:00:15       5          Name5
+
+
+=================================================
+
+select 
+   to_char(time , 'YYYY-MM-DD HH24:MI:SS') as time1 , id  , name
+from
+  (
+    select rownum as RowNumber , time , id  , name
+    from emp
+    where name = 'Name5'
+  )
+where
+    RowNumber > 0 AND RowNumber <= 15;
+    
+    
+delete from emp
+where
+    ( time , id , name ) IN (
+        select 
+           time , id  , name
+        from
+          (
+            select rownum as RowNumber , time , id  , name
+            from emp
+   --         where name = 'Name5'
+          )
+        where
+            RowNumber > 0 AND RowNumber <= 3
+    );
+
+
+
+
+
+=================================================
+
+
+
+select
+   to_char(time , 'YYYY-MM-DD HH24:MI:SS') as time1 , id  , name
+from emp
+order by 1,2,3;
+
+
+
